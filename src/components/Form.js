@@ -12,6 +12,7 @@ export class Form extends Component {
         <input type='text' name='firstNum' onChange={this.inputHandler} />
         <label htmlFor='second'>SECOND NUMBER</label>
         <input type='text' name='secondNum' onChange={this.inputHandler} />
+        {this.props.children}
       </div>
     );
   }

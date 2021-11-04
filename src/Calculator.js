@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import './App.css';
 import Card from './components/Card';
+import Error from './components/Error';
 import Footer from './components/Footer';
 import Form from './components/Form';
 import Header from './components/Header';
@@ -11,23 +12,23 @@ class Calculator extends Component {
   state = {
     firstNum: { input: 0, isValid: true },
     secondNum: { input: 0, isValid: true },
-    isPassed: true,
   };
 
   changeHandler = (event) => {
     const name = event.target.name;
-    const value = event.target.value;
+    const value = event.target.value.trim();
     const validation = +value ? true : false;
+
+    if (!value) this.setState({ [name]: { input: 0, isValid: true } });
 
     if (validation)
       this.setState({ [name]: { input: +value, isValid: validation } });
     else this.setState({ [name]: { input: 0, isValid: validation } });
-
-    if (!checkValid(this.state)) this.setState({ isPassed: false });
   };
 
-  displayMessage = () => {
-    return <p>Error</p>;
+  checkValidtion = () => {
+    const { firstNum, secondNum } = this.state;
+    return checkValid([firstNum, secondNum]);
   };
 
   displayResults = () => {
@@ -36,16 +37,15 @@ class Calculator extends Component {
     ));
   };
 
-  disp;
   render() {
-    console.log(this.state);
     return (
       <div className='container'>
-        {!this.state.isPassed && <p>error</p>}
         <Header />
         <main>
           <Card>
-            <Form changeHandler={this.changeHandler} />
+            <Form changeHandler={this.changeHandler}>
+              {!this.checkValidtion() && <Error />}
+            </Form>
             <Results />
           </Card>
         </main>
