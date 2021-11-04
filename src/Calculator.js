@@ -6,7 +6,13 @@ import Footer from './components/Footer';
 import Form from './components/Form';
 import Header from './components/Header';
 import Results from './components/Results';
-import { checkValid } from './utils/util';
+import {
+  checkValid,
+  addtion,
+  subtraction,
+  multiplication,
+  division,
+} from './utils/util';
 
 class Calculator extends Component {
   state = {
@@ -26,15 +32,22 @@ class Calculator extends Component {
     else this.setState({ [name]: { input: 0, isValid: validation } });
   };
 
-  checkValidtion = () => {
+  checkValidation = () => {
     const { firstNum, secondNum } = this.state;
     return checkValid([firstNum, secondNum]);
   };
 
   displayResults = () => {
-    return Object.entries(this.state).map(([key, value]) => (
-      <p key={key}>{value.input}</p>
-    ));
+    const num1 = this.state.firstNum.input;
+    const num2 = this.state.secondNum.input;
+    return (
+      <>
+        <p>{addtion(num1, num2)}</p>
+        <p>{subtraction(num1, num2)}</p>
+        <p>{multiplication(num1, num2)}</p>
+        <p>{division(num1, num2)}</p>
+      </>
+    );
   };
 
   render() {
@@ -44,9 +57,9 @@ class Calculator extends Component {
         <main>
           <Card>
             <Form changeHandler={this.changeHandler}>
-              {!this.checkValidtion() && <Error />}
+              {!this.checkValidation() && <Error />}
             </Form>
-            <Results />
+            <Results results={this.displayResults} />
           </Card>
         </main>
         <Footer author='Jinok' />
