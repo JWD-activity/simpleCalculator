@@ -10,7 +10,7 @@
 - Create an **Error** component that **shows the error message** if invalid input is entered.
 - Create a **Select** component that shows a dropdown menu for the user to **choose the operator**.
 - Create logic for input validation.
-- 
+
 ## My process
 ### Built with
 - HTML
