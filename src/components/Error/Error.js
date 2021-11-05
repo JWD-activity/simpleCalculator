@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import styles from './Error.module.css';
 
 export class Error extends Component {
   render() {
-    return <p className='error'>⛔️ Please, Enter a valid number!</p>;
+    return <p className={styles.error}>⛔️ PLEASE, ENTER A VALID NUMBER!</p>;
   }
 }
 

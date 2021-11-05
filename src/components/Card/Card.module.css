@@ -1,0 +1,19 @@
+.card {
+  background-color: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  display: flex;
+  margin: 1rem;
+  max-width: 100%;
+}
+
+.card__body {
+  width: 100%;
+  display: flex;
+}
+
+@media (max-width: 720px) {
+  .card__body {
+    flex-direction: column;
+  }
+}

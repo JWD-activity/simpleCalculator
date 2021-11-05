@@ -1,0 +1,10 @@
+select {
+  border: none;
+  background-color: var(--form-color);
+  border-radius: var(--form-border-radius);
+  font-size: 2rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  font-weight: var(--fw-bold);
+}

@@ -1,0 +1,10 @@
+.error {
+  color: var(--error-color);
+  font-weight: var(--fw-bold);
+}
+
+@media (max-width: 576px) {
+  .error {
+    text-align: center;
+  }
+}

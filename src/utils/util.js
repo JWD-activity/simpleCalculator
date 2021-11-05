@@ -1,21 +1,43 @@
-export const addtion = (num1, num2) => {
-  return `${num1} + ${num2} = ${num1 + num2}`;
+// Escaped Unicode
+// ∞ \u221e
+// ² \u00B2
+// √ \u221a
+// × \u00d7
+// ÷ \u00f7
+// + \u002b
+// - \u2212
+// = \u003d
+// ^ \0005e
+
+export const calculate = (num1, num2, operator) => {
+  switch (operator) {
+    case '+':
+      return `${num1} + ${num2} = ${+(num1 + num2)}`;
+    case '-':
+      return `${num1} - ${num2} = ${+(num1 - num2)}`;
+    case '×':
+      return `${num1} × ${num2} = ${+(num1 * num2)}`;
+    case '÷':
+      return num2 === 0
+        ? `${num1} ÷ ${num2} = ∞`
+        : `${num1} ÷ ${num2} = ${+(num1 / num2)}`;
+    case '^':
+      return `${num1} ^ ${num2} = ${Math.pow(num1, num2)}`;
+    default:
+      return;
+  }
 };
 
-export const subtraction = (num1, num2) => {
-  return `${num1} - ${num2} = ${num1 - num2}`;
+export const checkValid = ([...inputs]) => {
+  return [...inputs]
+    .map((input) => input.isValid)
+    .every((value) => value === true);
 };
 
-export const multiplication = (num1, num2) => {
-  return `${num1} × ${num2} = ${num1 * num2}`;
+export const checkIsNaN = ([...inputs]) => {
+  return [...inputs].every((value) => !isNaN(value));
 };
 
-export const division = (num1, num2) => {
-  if (num2 === 0) return `${num1} ÷ ${num2} = \u221e`;
-  return `${num1} ÷ ${num2} = ${+(num1 / num2).toFixed(3)}`;
-};
-
-export const checkValid = (inputs) => {
-  console.log(inputs);
-  return inputs.map((input) => input.isValid).every((value) => value === true);
+export const checkIsNull = ([...inputs]) => {
+  return [...inputs].every((value) => value !== null);
 };
