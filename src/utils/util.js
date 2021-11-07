@@ -1,13 +1,9 @@
-// Escaped Unicode
-// ∞ \u221e
-// ² \u00B2
-// √ \u221a
-// × \u00d7
-// ÷ \u00f7
-// + \u002b
-// - \u2212
-// = \u003d
-// ^ \0005e
+// Problem - How to display math symbols.
+// solution 1 - using HTML symbol codes, entities, ASCII characters or Unicode.
+//              Reference https://www.toptal.com/designers/htmlarrows/math/
+//                        https://flaviocopes.com/javascript-unicode/
+//                        https://dmitripavlutin.com/what-every-javascript-developer-should-know-about-unicode/#1-the-idea-behind-unicode
+// solution 2 - using npm packages (e.g react-mathjax, react-katex)
 
 export const calculate = (num1, num2, operator) => {
   switch (operator) {
@@ -19,10 +15,15 @@ export const calculate = (num1, num2, operator) => {
       return `${num1} × ${num2} = ${+(num1 * num2)}`;
     case '÷':
       return num2 === 0
-        ? `${num1} ÷ ${num2} = ∞`
-        : `${num1} ÷ ${num2} = ${+(num1 / num2)}`;
+        ? `${num1} \u{000F7} ${num2} = \u{0221E}`
+        : `${num1} \u{000F7} ${num2} = ${+(num1 / num2)}`;
     case '^':
-      return `${num1} ^ ${num2} = ${Math.pow(num1, num2)}`;
+      return (
+        <>
+          {num1}
+          <sup>{num2}</sup> = {Math.pow(num1, num2)}
+        </>
+      );
     default:
       return;
   }
