@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, createRef } from 'react';
 import Error from './components/Error/Error';
 import Card from './components/Card/Card';
 import Footer from './components/Footer/Footer';
@@ -6,14 +6,26 @@ import Form from './components/Form/Form';
 import Header from './components/Header/Header';
 import Result from './components/Result/Result';
 import Select from './components/Select/Select';
-import { checkValid, checkIsNaN, checkIsNull, calculate } from './utils/util';
+import {
+  checkValid,
+  checkIsNaN,
+  checkIsNull,
+  calculate,
+  reset,
+} from './utils/util';
+
+const initialState = {
+  firstNum: { input: null, isValid: true },
+  secondNum: { input: null, isValid: true },
+  operator: null,
+};
 
 class Calculator extends Component {
-  state = {
-    firstNum: { input: null, isValid: true },
-    secondNum: { input: null, isValid: true },
-    operator: null,
-  };
+  firstNumRef = createRef();
+  secondNumRef = createRef();
+  operatorRef = createRef();
+
+  state = initialState;
 
   changeHandler = (event) => {
     const name = event.target.name;
@@ -63,17 +75,31 @@ class Calculator extends Component {
     } else return <p>PLEASE, ENTER SOMETHING TO BEGIN.</p>;
   };
 
+  // Clear Inputs
+  clear = () => {
+    this.setState(initialState);
+    reset([this.firstNumRef, this.secondNumRef, this.operatorRef]);
+  };
+
   render() {
     const first = this.state.firstNum.isValid;
     const second = this.state.secondNum.isValid;
-
     return (
       <div className='container'>
         <Header />
         <main>
           <Card>
-            <Form changeHandler={this.changeHandler} inputs={[first, second]}>
-              <Select changeHandler={this.changeHandler} />
+            <Form
+              changeHandler={this.changeHandler}
+              inputs={[first, second]}
+              firstRef={this.firstNumRef}
+              secondRef={this.secondNumRef}
+              clear={this.clear}
+            >
+              <Select
+                changeHandler={this.changeHandler}
+                operRef={this.operatorRef}
+              />
               {!this.checkValidation() && <Error />}
             </Form>
             <Result results={this.displayResults} />

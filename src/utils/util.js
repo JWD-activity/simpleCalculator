@@ -2,7 +2,6 @@
 // solution 1 - using HTML symbol codes, entities, ASCII characters or Unicode.
 //              Reference https://www.toptal.com/designers/htmlarrows/math/
 //                        https://flaviocopes.com/javascript-unicode/
-//                        https://dmitripavlutin.com/what-every-javascript-developer-should-know-about-unicode/#1-the-idea-behind-unicode
 // solution 2 - using npm packages (e.g react-mathjax, react-katex)
 
 export const calculate = (num1, num2, operator) => {
@@ -41,4 +40,8 @@ export const checkIsNaN = ([...inputs]) => {
 
 export const checkIsNull = ([...inputs]) => {
   return [...inputs].every((value) => value !== null);
+};
+
+export const reset = ([...objs]) => {
+  return [...objs].forEach((obj) => (obj.current.value = ''));
 };

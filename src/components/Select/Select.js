@@ -24,6 +24,7 @@ export class Select extends Component {
           name='operator'
           className='selection'
           onChange={this.selectHandler}
+          ref={this.props.operRef}
         >
           <option value=''>CHOOSE YOUR OPTION.</option>
           {this.generateOptions()}
